@@ -2,11 +2,13 @@ package com.example.demo.DTO;
 
 import com.example.demo.entity.BoardEntity;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.Builder;
 
 @Setter
 @Getter
+@NoArgsConstructor
 public class BoardDto {
     private Integer id;
 
@@ -14,8 +16,8 @@ public class BoardDto {
     private String contents;
 
 
-    public BoardDto(Integer id,String title,String contents){
-        this.id         = id;
+    public BoardDto(String title,String contents){
+
         this.title      = title;
         this.contents   = contents;
     }
@@ -27,7 +29,10 @@ public class BoardDto {
     }
 
     public BoardEntity toEntity(){
-        BoardEntity boardEntity = new BoardEntity(this.id,this.title,this.contents);
+        BoardEntity boardEntity = new BoardEntity() ;
+        boardEntity.setTitle(this.title);
+        boardEntity.setContents(this.contents);
+
         return boardEntity;
     }
 }

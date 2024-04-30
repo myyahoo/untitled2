@@ -38,9 +38,15 @@ public class BoardDao {
         List<BoardDto> boardDtoList = new ArrayList<>();
 
         for(BoardEntity boardEntity:boardEntities){
-            boardDtoList.add(new BoardDto(boardEntity.getId(), boardEntity.getTitle(), boardEntity.getContents()));
+            boardDtoList.add(new BoardDto(boardEntity.getTitle(), boardEntity.getContents()));
 
         }
         return boardDtoList;
+    }
+
+    public Integer update(BoardDto boardDto) throws Exception{
+
+        BoardEntity boardEntity = boardDto.toEntity();
+        return sqlSession.insert("mappers.board-mapper.insertBoard",boardEntity);
     }
 }
