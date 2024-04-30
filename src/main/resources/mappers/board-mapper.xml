@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mappers.board-mapper">
+    <select id="getList" resultType="com.example.demo.entity.BoardEntity">
+        SELECT
+        *
+        FROM board
+        <if test="keyword != null">
+            where title like concat('%',#{keyword},'%')
+        </if>
+        order by id desc
+        limit #{startNo},#{listOffset}
+    </select>
+
+    <select id="getOne" parameterType="Integer" resultType="com.example.demo.entity.BoardEntity">
+        select * from board where id=#{id}
+    </select>
+
+    <select id="getTotalCnt" resultType="Integer">
+        select count(id) from boards
+        <if test="keyword != null">
+            where title like concat('%',#{keyword},'%')
+        </if>
+    </select>
+    <insert id="insertBoard" parameterType="com.example.demo.entity.BoardEntity" useGeneratedKeys="true" keyProperty="id">
+        insert into board set title=#{title},contents=#{contents}
+    </insert>
+
+
+</mapper>
