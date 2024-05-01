@@ -1,6 +1,6 @@
 package com.example.demo.controller.Api;
 
-import com.example.demo.DTO.BoardDto;
+import com.example.demo.dto.BoardDto;
 import com.example.demo.service.BoardService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,26 +10,32 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
+//@RequiredArgsConstructor
 @RestController
+@RequestMapping(value = "/api/board")
 public class BoardController {
     private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 
+    private  final BoardService boardService ;   // final 일경우 반드시 생성자를 통한 초기화
+
     @Autowired
-    BoardService boardService;
+    public BoardController(BoardService boardService){
+        this.boardService = boardService;    //변수가 동일하기에 this 사용
+    }
+    @GetMapping(value="/list/{id}")
+    public ResponseEntity list(@PathVariable(value="id") String id,@RequestParam(value="page",required = false,defaultValue = "0") Integer page){
 
+        //public ResponseEntity list(@RequestParam(value="page",required = false,defaultValue = "0") Integer page){
 
-    @GetMapping("/api/board/list")
-    public ResponseEntity list(@RequestParam(value="page",required = false,defaultValue = "0") Integer page){
-        logger.info("Info log");
+        logger.info(String.valueOf(page));
+        logger.info(id);
         List<BoardDto> boardDtoList = boardService.getList();
         return new ResponseEntity(boardDtoList,new HttpHeaders(), HttpStatus.valueOf(200));
     }
 
-    @PostMapping("/api/board/update")
+    @PostMapping(value="/update")
     //public ResponseEntity update(@RequestBody BoardDto boardDto,@RequestParam(value = "age",required = false) String age) throws Exception{   //json 가능
     public ResponseEntity update(@ModelAttribute BoardDto boardDto,@RequestParam(value = "age",required = false) String age) throws Exception{
     //public  ResponseEntity update(@RequestParam(value="title") String title,@RequestParam(value = "contents") String contents) throws Exception{

@@ -1,25 +1,23 @@
-package com.example.demo.Dao;
+package com.example.demo.repository;
 
-import com.example.demo.DTO.BoardDto;
+import com.example.demo.dto.BoardDto;
 import com.example.demo.entity.BoardEntity;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.mybatis.spring.SqlSessionTemplate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
 
 @Repository
-public class BoardDao {
+public class BoardRepository {
 
     private final SqlSession sqlSession;
 
     @Autowired
-    public BoardDao(SqlSession sqlSession){
+    public BoardRepository(SqlSession sqlSession){
         this.sqlSession =sqlSession;
     }
 
