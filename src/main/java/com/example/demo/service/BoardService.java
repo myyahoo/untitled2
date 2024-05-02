@@ -28,4 +28,8 @@ public class BoardService {
         logger.info("service");
         boardRepository.update(boardDto);
     }
+
+    public void update(){
+
+    }
 }

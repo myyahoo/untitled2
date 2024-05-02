@@ -17,7 +17,7 @@
     </select>
 
     <select id="getTotalCnt" resultType="Integer">
-        select count(id) from boards
+        select count(id) from board
         <if test="keyword != null">
             where title like concat('%',#{keyword},'%')
         </if>
