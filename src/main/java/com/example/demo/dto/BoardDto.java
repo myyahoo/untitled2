@@ -1,6 +1,10 @@
 package com.example.demo.dto;
 
 import com.example.demo.entity.BoardEntity;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
+
 import lombok.*;
 
 @Setter
@@ -12,7 +16,10 @@ import lombok.*;
 public class BoardDto {
     private Integer id;
 
+    @NotBlank
+    @NotNull
     private String title;
+
     private String contents;
     private String age;
 
