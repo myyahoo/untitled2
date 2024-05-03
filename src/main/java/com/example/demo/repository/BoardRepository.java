@@ -26,7 +26,7 @@ public class BoardRepository {
         this.sqlSession =sqlSession;
     }
 
-    public List<BoardDto> getList(){
+    public List<BoardEntity> getList(){
 
         BoardDto boardDto;
 
@@ -40,14 +40,14 @@ public class BoardRepository {
         Integer totalCnt = sqlSession.selectOne("mappers.board-mapper.getTotalCnt");
 
         logger.info(String.valueOf(totalCnt));
-
+/*
         List<BoardDto> boardDtoList = new ArrayList<>();
 
         for(BoardEntity boardEntity:boardEntities){
             boardDtoList.add(new BoardDto(boardEntity.getTitle(), boardEntity.getContents()));
 
-        }
-        return boardDtoList;
+        }*/
+        return boardEntities;
     }
 
     public Integer update(BoardDto boardDto) throws Exception{

@@ -1,14 +1,14 @@
 package com.example.demo.dto;
 
 import com.example.demo.entity.BoardEntity;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Setter
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
+//final이나 @NonNull인 필드 값만 파라미터로 받는 생성자
+//@RequiredArgsConstructor
 public class BoardDto {
     private Integer id;
 
@@ -17,16 +17,14 @@ public class BoardDto {
     private String age;
 
 
-    public BoardDto(String title,String contents){
+    public  static BoardDto fromEntity(BoardEntity boardEntity){
+        BoardDto boardDto = new BoardDto();
 
-        this.title      = title;
-        this.contents   = contents;
-    }
+        boardDto.setId(boardEntity.getId());
+        boardDto.setTitle(boardEntity.getTitle());
+        boardDto.setContents(boardEntity.getContents());
 
-    public void fromEntity(BoardEntity boardEntity){
-        this.id         = boardEntity.getId();
-        this.title      = boardEntity.getTitle();
-        this.contents   =   boardEntity.getContents();
+        return boardDto;
     }
 
     public BoardEntity toEntity(){
